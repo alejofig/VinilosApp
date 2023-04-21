@@ -1,4 +1,4 @@
-package com.example.vinilosapp
+package com.mobile.vinilosapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

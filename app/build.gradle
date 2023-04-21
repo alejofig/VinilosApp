@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.vinilosapp'
+    namespace 'com.mobile.vinilosapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.vinilosapp"
+        applicationId "com.mobile.vinilosapp"
         minSdk 21
         targetSdk 33
         versionCode 1
