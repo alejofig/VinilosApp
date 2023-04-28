@@ -26,6 +26,7 @@ class AlbumDetailFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumDetalleViewModel
     private var viewModelAdapter: AlbumDetailAdapter? = null
+    private var albumId: Int = 100
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +44,19 @@ class AlbumDetailFragment : Fragment() {
         recyclerView.adapter = viewModelAdapter
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            albumId = it.getInt("id_album")
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        viewModel = ViewModelProvider(this, AlbumDetalleViewModel.Factory(activity.application))
+        viewModel = ViewModelProvider(this, AlbumDetalleViewModel.Factory(activity.application, albumId))
             .get(AlbumDetalleViewModel::class.java)
         viewModel.album.observe(viewLifecycleOwner, Observer<Album> {
             it.apply {

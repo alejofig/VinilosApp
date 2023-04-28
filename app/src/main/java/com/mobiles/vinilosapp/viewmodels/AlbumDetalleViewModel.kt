@@ -5,8 +5,8 @@ import androidx.lifecycle.*
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.network.NetworkServiceAdapter
 
-class AlbumDetalleViewModel(application: Application) :  AndroidViewModel(application) {
-
+class AlbumDetalleViewModel(application: Application, albumId: Int) :  AndroidViewModel(application) {
+    val id:Int = albumId
     private val _album = MutableLiveData<Album>()
 
     val album: LiveData<Album>
@@ -27,7 +27,7 @@ class AlbumDetalleViewModel(application: Application) :  AndroidViewModel(applic
     }
 
     private fun refreshDataFromNetwork() {
-        NetworkServiceAdapter.getInstance(getApplication()).getAlbum({
+        NetworkServiceAdapter.getInstance(getApplication()).getAlbum(id, {
             _album.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
@@ -40,12 +40,12 @@ class AlbumDetalleViewModel(application: Application) :  AndroidViewModel(applic
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val albumId: Int) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumDetalleViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumDetalleViewModel(app) as T
+                return AlbumDetalleViewModel(app, albumId) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

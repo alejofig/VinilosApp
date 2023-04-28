@@ -14,7 +14,7 @@ import org.json.JSONObject
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL= "https://vynils-back-heroku.herokuapp.com/"
+        const val BASE_URL= "http://192.168.1.5:3000/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -45,7 +45,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
-    fun getAlbum(onComplete:(resp:Album)->Unit, onError: (error: VolleyError)->Unit){
+    fun getAlbum(id: Int, onComplete:(resp:Album)->Unit, onError: (error: VolleyError)->Unit){
         requestQueue.add(getRequest("albums/100",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
