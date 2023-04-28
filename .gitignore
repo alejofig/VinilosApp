@@ -13,3 +13,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Exclude Gradle build files and folders
+.gradle/
+build/
+# Exclude IntelliJ IDEA files
+.idea/

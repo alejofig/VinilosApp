@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mobiles.vinilosapp.R
@@ -24,10 +25,7 @@ class AlbumFragment : Fragment() {
     private lateinit var viewModel: AlbumViewModel
     private var viewModelAdapter: AlbumsAdapter? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
@@ -38,6 +36,12 @@ class AlbumFragment : Fragment() {
         recyclerView = binding.albumsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
+
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+        val largePadding = resources.getDimensionPixelSize(R.dimen.grid_spacing)
+        val smallPadding = resources.getDimensionPixelSize(R.dimen.grid_spacing_small)
+        recyclerView.addItemDecoration(AlbumsDecoration(largePadding, smallPadding))
     }
 
 
