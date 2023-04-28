@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.albums.AlbumFragment"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp">
+    android:layout_marginStart="0dp"
+    android:layout_marginEnd="0dp">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -13,10 +14,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/albumsRv"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/album_item"/>
+        android:background="@color/cardview_dark_background"
+        android:paddingStart="@dimen/grid_spacing"
+        android:paddingEnd="@dimen/grid_spacing"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/albumsRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/album_item"/>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>
