@@ -9,6 +9,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.mobiles.vinilosapp.models.Album
+import com.mobiles.vinilosapp.models.Artist
 import org.json.JSONArray
 
 class NetworkServiceAdapter constructor(context: Context) {
@@ -43,6 +44,46 @@ class NetworkServiceAdapter constructor(context: Context) {
                 onError(it)
             }))
     }
+
+    fun getArtists(onComplete:(resp:List<Artist>)->Unit, onError: (error: VolleyError)->Unit){
+        requestQueue.add(getRequest("musicians",
+            Response.Listener<String> { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Artist>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    val artistAlbums = item.getJSONArray("albums")
+                    val albums = mutableListOf<Album>()
+                    for (j in 0 until artistAlbums.length()) {
+                        val albumItem = artistAlbums.getJSONObject(j)
+                        val album = Album(
+                            albumId = albumItem.getInt("id"),
+                            name = albumItem.getString("name"),
+                            cover = albumItem.getString("cover"),
+                            releaseDate = albumItem.getString("releaseDate"),
+                            description = albumItem.getString("description"),
+                            genre = albumItem.getString("genre"),
+                            recordLabel = albumItem.getString("recordLabel")
+                        )
+                        albums.add(album)
+                    }
+                    val artist = Artist(
+                        artistId = item.getInt("id"),
+                        name = item.getString("name"),
+                        image = item.getString("image"),
+                        description = item.getString("description"),
+                        birthDate = item.getString("birthDate"),
+                        albums = albums
+                    )
+                    list.add(artist)
+                }
+                onComplete(list)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
+    }
+
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
