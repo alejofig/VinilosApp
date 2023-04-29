@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumDetailItemBinding
 import com.mobiles.vinilosapp.models.Album
@@ -43,6 +44,9 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
             // Navigate using that action
             //holder.viewDataBinding.root.findNavController().navigate(action)
         }
+        Glide.with(holder.itemView)
+            .load(album.cover)
+            .into(holder.viewDataBinding.albumImage)
     }
 
     override fun getItemCount(): Int {
