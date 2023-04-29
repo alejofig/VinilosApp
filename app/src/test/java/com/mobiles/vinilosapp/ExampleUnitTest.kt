@@ -1,4 +1,4 @@
-package com.example.vinilosapp
+package com.mobiles.vinilosapp
 
 import org.junit.Test
 
