@@ -19,3 +19,5 @@ local.properties
 build/
 # Exclude IntelliJ IDEA files
 .idea/
+.idea/*
+.gradle/*
