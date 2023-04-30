@@ -9,7 +9,7 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
 
     private val _artists = MutableLiveData<List<Artist>>()
 
-    val albums: LiveData<List<Artist>>
+    val artists: LiveData<List<Artist>>
         get() = _artists
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
@@ -43,9 +43,9 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
     class Factory(val app: Application) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(ArtistViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumViewModel(app) as T
+                return ArtistViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

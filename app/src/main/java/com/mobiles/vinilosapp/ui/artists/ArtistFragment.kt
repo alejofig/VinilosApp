@@ -39,9 +39,9 @@ class ArtistFragment : Fragment() {
         recyclerView.adapter = viewModelAdapter
 
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
-        val largePadding = resources.getDimensionPixelSize(R.dimen.grid_spacing)
-        val smallPadding = resources.getDimensionPixelSize(R.dimen.grid_spacing_small)
+        recyclerView.layoutManager = GridLayoutManager(context, 1, RecyclerView.VERTICAL, false)
+        val largePadding = 10
+        val smallPadding = 0
         recyclerView.addItemDecoration(ArtistDecoration(largePadding, smallPadding))
     }
 
@@ -53,7 +53,7 @@ class ArtistFragment : Fragment() {
         }
         viewModel = ViewModelProvider(this, ArtistViewModel.Factory(activity.application))
             .get(ArtistViewModel::class.java)
-        viewModel.albums.observe(viewLifecycleOwner, Observer<List<Artist>> {
+        viewModel.artists.observe(viewLifecycleOwner, Observer<List<Artist>> {
             it.apply {
                 viewModelAdapter!!.artists = this
             }

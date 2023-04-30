@@ -26,7 +26,7 @@
             android:id="@+id/artistsRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/album_item"/>
+            tools:listitem="@layout/artist_item"/>
 
     </androidx.core.widget.NestedScrollView>
 

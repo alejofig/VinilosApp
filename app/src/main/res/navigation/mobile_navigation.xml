@@ -28,6 +28,6 @@
     <fragment
         android:id="@+id/navigation_artists"
         android:name="com.mobiles.vinilosapp.ui.artists.ArtistFragment"
-        android:label="Artists"
+        android:label="Listado de artistas"
         tools:layout="@layout/artist_fragment" />
 </navigation>

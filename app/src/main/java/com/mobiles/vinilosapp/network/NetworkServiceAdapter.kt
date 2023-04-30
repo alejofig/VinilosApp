@@ -50,6 +50,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Artist>()
+
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
                     val artistAlbums = item.getJSONArray("albums")
@@ -77,7 +78,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                     )
                     list.add(artist)
                 }
-                onComplete(list)
+                val sortedList = list.sortedBy { it.name } // Ordena la lista por nombre
+                onComplete(sortedList)
             },
             Response.ErrorListener {
                 onError(it)
