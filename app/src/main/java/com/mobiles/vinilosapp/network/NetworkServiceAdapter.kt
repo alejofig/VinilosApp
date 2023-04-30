@@ -33,13 +33,15 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
+
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
                     list.add(i, Album(albumId = item.getInt("id"),
                         name = item.getString("name"), cover = item.getString("cover"),
                         recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
                 }
-                onComplete(list)
+                val sortedList = list.sortedBy { it.name } // Ordena la lista por nombre
+                onComplete(sortedList)
             },
             Response.ErrorListener {
                 onError(it)
