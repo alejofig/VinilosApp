@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumItemBinding
 import com.mobiles.vinilosapp.models.Album
 import com.bumptech.glide.Glide
+import com.mobiles.vinilosapp.ui.albums.AlbumFragmentDirections
 
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
@@ -42,9 +44,9 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             .into(holder.viewDataBinding.albumImage)
 
         holder.viewDataBinding.root.setOnClickListener {
-            //val action = CollectorFragmentDirections.actionCollectorFragmentToAlbumFragment()
-            // Navigate using that action
-            //holder.viewDataBinding.root.findNavController().navigate(action)
+            val action = AlbumFragmentDirections.actionNavigationAlbumsToNavigationAlbumDetail(idAlbum = album.albumId)
+             // Navigate using that action
+             holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 

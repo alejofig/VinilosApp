@@ -11,6 +11,7 @@ import com.android.volley.toolbox.Volley
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.models.Artist
 import org.json.JSONArray
+import org.json.JSONObject
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
@@ -39,6 +40,20 @@ class NetworkServiceAdapter constructor(context: Context) {
                         recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
                 }
                 onComplete(list)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
+    }
+
+    fun getAlbum(id: Int, onComplete:(resp:Album)->Unit, onError: (error: VolleyError)->Unit){
+        requestQueue.add(getRequest("albums/$id",
+            Response.Listener<String> { response ->
+                val resp = JSONObject(response)
+                val album = Album(albumId = resp.getInt("id"),
+                    name = resp.getString("name"), cover = resp.getString("cover"),
+                    recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"))
+                onComplete(album)
             },
             Response.ErrorListener {
                 onError(it)
