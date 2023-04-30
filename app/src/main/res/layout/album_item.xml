@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{album.genre}"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="@color/white"/>
+                        android:textColor="@android:color/darker_gray"/>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
