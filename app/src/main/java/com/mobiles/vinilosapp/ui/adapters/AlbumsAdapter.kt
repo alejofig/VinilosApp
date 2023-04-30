@@ -54,6 +54,11 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         return albums.size
     }
 
+    fun updateAlbumList(albumList: List<Album>){
+        this.albums = albumList
+        notifyDataSetChanged()
+    }
+
 
     class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
