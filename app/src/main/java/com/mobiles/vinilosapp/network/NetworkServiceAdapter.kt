@@ -6,6 +6,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.mobiles.vinilosapp.models.Album
@@ -103,6 +104,37 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
+
+    fun postAlbum(album: Album,  onComplete:(resp:Album)->Unit , onError: (error:VolleyError)->Unit){
+        val bodyJson = JSONObject()
+        bodyJson.put("name", album.name)
+        bodyJson.put("cover", album.cover)
+        bodyJson.put("releaseDate", album.releaseDate)
+        bodyJson.put("description", album.description)
+        bodyJson.put("genre", album.genre)
+        bodyJson.put("recordLabel", album.recordLabel)
+
+        requestQueue.add(postRequest("albums", bodyJson,
+            { resp ->
+                val album = Album(albumId = resp.getInt("id"),
+                    name = resp.getString("name"),
+                    cover = resp.getString("cover"),
+                    releaseDate = resp.getString("releaseDate"),
+                    description = resp.getString("description"),
+                    genre = resp.getString("genre"),
+                    recordLabel = resp.getString("recordLabel")
+                )
+                onComplete(album)
+            },
+            {
+                onError(it)
+            }))
+
+    }
+
+    private fun postRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
+        return  JsonObjectRequest(Request.Method.POST, BASE_URL+path, body, responseListener, errorListener)
+    }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
