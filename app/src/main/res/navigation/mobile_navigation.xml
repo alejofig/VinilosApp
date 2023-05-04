@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_albums">
+    app:startDestination="@id/albumCreateFragment">
 
 
     <fragment
@@ -32,6 +32,8 @@
         android:label="Listado de artistas"
         tools:layout="@layout/artist_fragment" />
 
+
+
     <fragment
         android:id="@+id/navigation_album_detail"
         android:name="com.mobiles.vinilosapp.ui.albums.AlbumDetailFragment"
@@ -42,4 +44,8 @@
             app:argType="integer"
             android:defaultValue="100" />
     </fragment>
+    <fragment
+        android:id="@+id/albumCreateFragment"
+        android:name="com.mobiles.vinilosapp.ui.albums.AlbumCreateFragment"
+        android:label="AlbumCreateFragment" />
 </navigation>

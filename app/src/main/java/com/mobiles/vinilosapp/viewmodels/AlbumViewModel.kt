@@ -2,8 +2,10 @@ package com.mobiles.vinilosapp.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.android.volley.VolleyError
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.network.NetworkServiceAdapter
+import org.json.JSONObject
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
 
@@ -36,6 +38,25 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         })
     }
 
+    fun createAlbum(album: Album, onSuccess: () -> Unit, onError: (error: VolleyError) -> Unit) {
+
+        val albumJson = JSONObject()
+        albumJson.put("name", album.name)
+        albumJson.put("cover", album.cover)
+        albumJson.put("releaseDate", album.releaseDate)
+        albumJson.put("description", album.description)
+        albumJson.put("genre", album.genre)
+        albumJson.put("recordLabel", album.recordLabel)
+
+        NetworkServiceAdapter.getInstance(getApplication()).postAlbum(albumJson, { resp ->
+            onSuccess()
+            refreshDataFromNetwork()
+        }, { error ->
+            onError(error)
+        })
+    }
+
+
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
@@ -51,4 +72,5 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         }
 
     }
+
 }
