@@ -14,4 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">sans-serif-black</item>
     </style>
+    
+    <style name="dataPickerTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:colorAccent">#322D2D</item>
+    </style>
+
 </resources>
