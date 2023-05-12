@@ -21,4 +21,16 @@ class CacheManager(context: Context) {
     fun getAlbumDetail(albumId: Int) : Album{
         return if (detallesAlbum.containsKey(albumId)) detallesAlbum[albumId]!! else Album(0, "cache", "cover", "01-01-2023","des", "genre", "record")
     }
+
+    private var cacheObjects: HashMap<String, List<Any>> = hashMapOf()
+    fun addListToCache(key: String, cacheObject: List<Any>){
+        if (!cacheObjects.containsKey(key)){
+            cacheObjects[key] = cacheObject
+        }
+    }
+
+    fun getListFromCache(key: String) : List<Any>{
+        return if (cacheObjects.containsKey(key)) cacheObjects[key]!! else listOf<Any>()
+    }
+
 }
