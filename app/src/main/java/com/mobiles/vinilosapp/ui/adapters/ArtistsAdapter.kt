@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.ArtistItemBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.mobiles.vinilosapp.models.Artist
 
 
@@ -38,7 +39,10 @@ class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
         }
 
         Glide.with(holder.itemView)
-            .load(artist.image)
+            .load(artist.image).apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image))
             .into(holder.viewDataBinding.artistImage)
 
         holder.viewDataBinding.root.setOnClickListener {

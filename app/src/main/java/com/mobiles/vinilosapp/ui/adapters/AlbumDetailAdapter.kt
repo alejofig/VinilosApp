@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumDetailItemBinding
 import com.mobiles.vinilosapp.models.Album
@@ -45,7 +46,10 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
             //holder.viewDataBinding.root.findNavController().navigate(action)
         }
         Glide.with(holder.itemView)
-            .load(album.cover)
+            .load(album.cover).apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image))
             .into(holder.viewDataBinding.albumImage)
     }
 
