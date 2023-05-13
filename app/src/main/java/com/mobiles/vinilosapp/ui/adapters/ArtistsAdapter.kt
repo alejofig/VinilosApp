@@ -10,6 +10,8 @@ import com.mobiles.vinilosapp.databinding.ArtistItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mobiles.vinilosapp.models.Artist
+import com.mobiles.vinilosapp.ui.artists.ArtistFragmentDirections
+import androidx.navigation.findNavController
 
 
 class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
@@ -46,9 +48,9 @@ class ArtistsAdapter : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
             .into(holder.viewDataBinding.artistImage)
 
         holder.viewDataBinding.root.setOnClickListener {
-            //val action = CollectorFragmentDirections.actionCollectorFragmentToAlbumFragment()
+            val action = ArtistFragmentDirections.actionNavigationArtistsToNavigationArtistDetail(idArtist =artist.artistId)
             // Navigate using that action
-            //holder.viewDataBinding.root.findNavController().navigate(action)
+            holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 
