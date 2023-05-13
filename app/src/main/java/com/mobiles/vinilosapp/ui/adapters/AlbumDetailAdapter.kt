@@ -16,7 +16,7 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
     var album :Album = Album(albumId = 0, name = "", cover = "", releaseDate = "", description = "", genre = "", recordLabel = "")
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyItemChanged(0)
         }
 
     class AlbumDetailViewHolder(val viewDataBinding: AlbumDetailItemBinding) :

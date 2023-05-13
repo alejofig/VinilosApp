@@ -20,7 +20,7 @@ class ArtistDetailAdapter: RecyclerView.Adapter<ArtistDetailAdapter.ArtistDetail
                                 albums =  emptyList())
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyItemChanged(0)
         }
     class ArtistDetailViewHolder(val viewDataBinding: ArtistDetailItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
