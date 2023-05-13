@@ -32,6 +32,47 @@ class NetworkServiceAdapter constructor(context: Context) {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
     }
+
+    suspend fun getArtists()= suspendCoroutine<List<Artist>>{ cont ->
+        requestQueue.add(getRequest("musicians",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Artist>()
+
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    val artistAlbums = item.getJSONArray("albums")
+                    val albums = mutableListOf<Album>()
+                    for (j in 0 until artistAlbums.length()) {
+                        val albumItem = artistAlbums.getJSONObject(j)
+                        val album = Album(
+                            albumId = albumItem.getInt("id"),
+                            name = albumItem.getString("name"),
+                            cover = albumItem.getString("cover"),
+                            releaseDate = albumItem.getString("releaseDate"),
+                            description = albumItem.getString("description"),
+                            genre = albumItem.getString("genre"),
+                            recordLabel = albumItem.getString("recordLabel")
+                        )
+                        albums.add(album)
+                    }
+                    val artist = Artist(
+                        artistId = item.getInt("id"),
+                        name = item.getString("name"),
+                        image = item.getString("image"),
+                        description = item.getString("description"),
+                        birthDate = item.getString("birthDate"),
+                        albums = albums
+                    )
+                    list.add(artist)
+                }
+                val sortedList = list.sortedBy { it.name } // Ordena la lista por nombre
+                cont.resume(sortedList)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
+    }
     suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont ->
         requestQueue.add(getRequest("albums",
             { response ->
@@ -68,45 +109,40 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
-    fun getArtists(onComplete:(resp:List<Artist>)->Unit, onError: (error: VolleyError)->Unit){
-        requestQueue.add(getRequest("musicians",
-            { response ->
-                val resp = JSONArray(response)
-                val list = mutableListOf<Artist>()
+    suspend fun getArtist(artistId: Int) = suspendCoroutine<Artist> { cont ->
 
-                for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
-                    val artistAlbums = item.getJSONArray("albums")
-                    val albums = mutableListOf<Album>()
-                    for (j in 0 until artistAlbums.length()) {
-                        val albumItem = artistAlbums.getJSONObject(j)
-                        val album = Album(
-                            albumId = albumItem.getInt("id"),
-                            name = albumItem.getString("name"),
-                            cover = albumItem.getString("cover"),
-                            releaseDate = albumItem.getString("releaseDate"),
-                            description = albumItem.getString("description"),
-                            genre = albumItem.getString("genre"),
-                            recordLabel = albumItem.getString("recordLabel")
-                        )
-                        albums.add(album)
-                    }
-                    val artist = Artist(
-                        artistId = item.getInt("id"),
-                        name = item.getString("name"),
-                        image = item.getString("image"),
-                        description = item.getString("description"),
-                        birthDate = item.getString("birthDate"),
-                        albums = albums
+        requestQueue.add(getRequest("musicians/$artistId",
+            { response ->
+                val resp = JSONObject(response)
+                val albumsJsonArray = resp.getJSONArray("albums")
+                val albumList = mutableListOf<Album>()
+                for (i in 0 until albumsJsonArray.length()) {
+                    val albumJson = albumsJsonArray.getJSONObject(i)
+                    val album = Album(
+                        albumId = albumJson.getInt("id"),
+                        name = albumJson.getString("name"),
+                        cover = albumJson.getString("cover"),
+                        releaseDate = albumJson.getString("releaseDate"),
+                        description = albumJson.getString("description"),
+                        genre = albumJson.getString("genre"),
+                        recordLabel = albumJson.getString("recordLabel")
                     )
-                    list.add(artist)
+                    albumList.add(album)
                 }
-                val sortedList = list.sortedBy { it.name } // Ordena la lista por nombre
-                onComplete(sortedList)
+                val artist = Artist(
+                    artistId = resp.getInt("id"),
+                    name = resp.getString("name"),
+                    image = resp.getString("image"),
+                    description = resp.getString("description"),
+                    birthDate = resp.getString("birthDate"),
+                    albums = albumList
+                )
+                cont.resume(artist)
             },
             {
-                onError(it)
-            }))
+                cont.resumeWithException(it)
+            })
+        )
     }
 
 

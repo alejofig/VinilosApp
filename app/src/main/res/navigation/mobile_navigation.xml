@@ -26,14 +26,18 @@
         android:id="@+id/action_navigation_albums_to_navigation_album_detail"
         app:destination="@id/navigation_album_detail" />
     </fragment>
+
+
+
+
     <fragment
         android:id="@+id/navigation_artists"
         android:name="com.mobiles.vinilosapp.ui.artists.ArtistFragment"
         android:label="Listado de artistas"
         tools:layout="@layout/artist_fragment" />
-
-
-
+    <action
+        android:id="@+id/action_navigation_artists_to_navigation_artist_detail"
+        app:destination="@id/navigation_artist_detail" />
     <fragment
         android:id="@+id/navigation_album_detail"
         android:name="com.mobiles.vinilosapp.ui.albums.AlbumDetailFragment"
@@ -45,7 +49,13 @@
             android:defaultValue="100" />
     </fragment>
     <fragment
-        android:id="@+id/albumCreateFragment"
-        android:name="com.mobiles.vinilosapp.ui.albums.AlbumCreateFragment"
-        android:label="AlbumCreateFragment" />
+        android:id="@+id/navigation_artist_detail"
+        android:name="com.mobiles.vinilosapp.ui.artists.ArtistDetailFragment"
+        android:label="Detalle Artista"
+        tools:layout="@layout/artist_detail_fragment" >
+        <argument
+            android:name="id_artist"
+            app:argType="integer"
+            android:defaultValue="100" />
+    </fragment>
 </navigation>
