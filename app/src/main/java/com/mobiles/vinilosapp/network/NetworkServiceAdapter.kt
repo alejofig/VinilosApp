@@ -38,9 +38,9 @@ class NetworkServiceAdapter constructor(context: Context) {
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Artist>()
-
+                var item:JSONObject? = null
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     val artistAlbums = item.getJSONArray("albums")
                     val albums = mutableListOf<Album>()
                     for (j in 0 until artistAlbums.length()) {
@@ -73,6 +73,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                 cont.resumeWithException(it)
             }))
     }
+
+
     suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont ->
         requestQueue.add(getRequest("albums",
             { response ->
