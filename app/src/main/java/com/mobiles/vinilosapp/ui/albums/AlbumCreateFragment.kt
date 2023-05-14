@@ -1,8 +1,8 @@
 package com.mobiles.vinilosapp.ui.albums
 
 import android.R
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +13,7 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +22,11 @@ import com.google.android.material.textfield.TextInputEditText
 import com.mobiles.vinilosapp.databinding.AlbumCreateFragmentBinding
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.viewmodels.AlbumViewModel
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class AlbumCreateFragment:  Fragment() {
@@ -31,6 +37,7 @@ class AlbumCreateFragment:  Fragment() {
     private lateinit var btnImage: ImageView
     private lateinit var pickMediaLauncher: ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var uri : Uri
+    private lateinit var date : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +61,8 @@ class AlbumCreateFragment:  Fragment() {
             pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
+        setDropDowns()
+
         return view
     }
 
@@ -64,8 +73,6 @@ class AlbumCreateFragment:  Fragment() {
         }
         viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))
             .get(AlbumViewModel::class.java)
-
-        setDropDowns()
 
         _binding?.albumCreateButton?.setOnClickListener(createAlbumListener())
 
@@ -78,8 +85,22 @@ class AlbumCreateFragment:  Fragment() {
         datePicker.show(activity.supportFragmentManager,  "datePicker")
     }
 
+
+
     fun onDateSelected(day:Int, month:Int, year:Int){
         _binding?.etDate?.setText("Has seleccionado el dia $day del mes $month de $year")
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month - 1) // Los meses en Calendar se indexan desde 0 (enero = 0, febrero = 1, etc.)
+        calendar.set(Calendar.DAY_OF_MONTH, day)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+        date = dateFormat.format(calendar.time)
     }
 
     private fun setDropDowns() {
@@ -107,7 +128,7 @@ class AlbumCreateFragment:  Fragment() {
                 albumId =  null,
                 name = nameTxt?.text.toString(),
                 cover = uri.toString(),
-                releaseDate = "1984-08-01T00:00:00-05:00",
+                releaseDate = date,
                 description = descTxt?.text.toString(),
                 genre = genreTxt?.text.toString(),
                 recordLabel = discTxt?.text.toString(),
@@ -118,14 +139,11 @@ class AlbumCreateFragment:  Fragment() {
 
                     NavHostFragment.findNavController(this@AlbumCreateFragment).navigateUp()
 
-            }, onError = { error ->
+                }, onError = { error ->
 
                     NavHostFragment.findNavController(this@AlbumCreateFragment).navigateUp()
-            })
-
-            _binding?.albumCancelButton?.setOnClickListener {
-                NavHostFragment.findNavController(this@AlbumCreateFragment).navigateUp()
-            }
+                }
+            )
 
         }
     }

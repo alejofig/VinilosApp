@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="stroke_color">#95EDED</color>
     <color name="fdark700">#2E2E2E</color>
+    <color name="fdark500">#474646</color>
     <color name="fdark900">#131313</color>
     <color name="transparente">#00FFFFFF</color>
 </resources>

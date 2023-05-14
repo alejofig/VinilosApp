@@ -72,8 +72,9 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         albumJson.put("recordLabel", album.recordLabel)
 
         NetworkServiceAdapter.getInstance(getApplication()).postAlbum(albumJson, { resp ->
-            onSuccess()
             refreshDataFromNetwork()
+            onSuccess()
+
         }, { error ->
             onError(error)
         })

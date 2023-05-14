@@ -10,25 +10,33 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
 
         <ImageView
             android:id="@+id/albumCreateImage"
-            android:layout_width="match_parent"
-            android:layout_height="330dp"
+            android:layout_width="267dp"
+            android:layout_height="267dp"
             android:background="@color/transparente"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/add_img"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_album_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nombre" />
+                android:hint="@string/nombre"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@color/fdark500"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,20 +49,30 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_album_desc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/descripcion" />
+                android:layout_height="120dp"
+                android:hint="@string/descripcion"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:background="@color/fdark500"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etDate"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/selecciona_el_d_a"
-            android:clickable="false"
-            android:focusable="false"/>
+            android:layout_height="match_parent">
 
-
+            <EditText
+                android:id="@+id/etDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/fdark500"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/select_date"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -66,7 +84,7 @@
                 android:id="@+id/txt_album_genre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
+                android:background="@color/fdark500"
                 android:ellipsize="end"
                 android:inputType="none"
                 android:maxLines="1"
@@ -87,7 +105,7 @@
                 android:id="@+id/txt_album_disc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
+                android:background="@color/fdark500"
                 android:ellipsize="end"
                 android:inputType="none"
                 android:maxLines="1"
@@ -99,33 +117,15 @@
                 tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <Button
+            android:id="@+id/album_create_button"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center_horizontal"
+            android:text="@string/crear"
+            android:backgroundTint="@color/teal_200"/>
 
-            <Button
-                android:id="@+id/album_cancel_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="5dp"
-                android:layout_weight=".5"
-                android:text="@string/cancelar"
-                style="?android:attr/buttonBarButtonStyle" />
 
-            <Button
-                android:id="@+id/album_create_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="5dp"
-                android:layout_weight=".5"
-                android:text="@string/crear"
-                style="?android:attr/buttonBarButtonStyle" />
-
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>
