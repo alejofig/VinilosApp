@@ -1,5 +1,6 @@
 package com.mobiles.vinilosapp.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -18,6 +19,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
 
     var albums :List<Album> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -58,6 +60,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         return albums.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateAlbumList(albumList: List<Album>){
         this.albums = albumList
         notifyDataSetChanged()

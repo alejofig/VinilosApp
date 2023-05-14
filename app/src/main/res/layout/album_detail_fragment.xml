@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.albums.AlbumFragment"
     android:layout_marginStart="32dp"
-    android:layout_marginEnd="32dp"
-    android:background="?attr/colorPrimaryVariant">
+    android:layout_marginEnd="32dp">
 
     <ProgressBar
         android:id="@+id/progressBar"
