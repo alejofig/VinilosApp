@@ -16,4 +16,14 @@
         <!-- background. -->
         <item name="android:background">@null</item>
     </style>
+    
+    <style name="dataPickerTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:colorAccent">#322D2D</item>
+    </style>
+
+    <style name="RoundedButton" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">100%</item>
+    </style>
+
 </resources>

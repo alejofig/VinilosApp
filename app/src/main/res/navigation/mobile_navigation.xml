@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_albums">
+    app:startDestination="@id/navigation_albums">
 
 
     <fragment
@@ -25,6 +25,9 @@
     <action
         android:id="@+id/action_navigation_albums_to_navigation_album_detail"
         app:destination="@id/navigation_album_detail" />
+        <action
+            android:id="@+id/action_navigation_albums_to_navigation_album_create_fragment2"
+            app:destination="@id/navigation_album_create_fragment" />
     </fragment>
 
 
@@ -58,4 +61,8 @@
             app:argType="integer"
             android:defaultValue="100" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_album_create_fragment"
+        android:name="com.mobiles.vinilosapp.ui.albums.AlbumCreateFragment"
+        android:label="AlbumCreateFragment" />
 </navigation>

@@ -7,6 +7,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="fdark700">#2E2E2E</color>
+    <color name="fdark500">#474646</color>
     <color name="fdark900">#131313</color>
     <color name="transparente">#00FFFFFF</color>
 </resources>

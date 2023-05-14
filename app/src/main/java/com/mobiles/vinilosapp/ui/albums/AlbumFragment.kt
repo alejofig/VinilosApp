@@ -1,6 +1,7 @@
 package com.mobiles.vinilosapp.ui.albums
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +32,12 @@ class AlbumFragment : Fragment() {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
+
+        _binding?.addAlbum!!.setOnClickListener { click ->
+            val action = AlbumFragmentDirections.actionNavigationAlbumsToNavigationAlbumCreateFragment2()
+            _binding?.root!!.findNavController().navigate(action)
+        }
+
         return view
     }
 
@@ -57,6 +65,7 @@ class AlbumFragment : Fragment() {
     }
 
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
@@ -66,6 +75,7 @@ class AlbumFragment : Fragment() {
             .get(AlbumViewModel::class.java)
         viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
             it.apply {
+                Log.d("Observer", "cambie")
                 viewModelAdapter!!.albums = this
             }
         })

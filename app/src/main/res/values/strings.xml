@@ -4,4 +4,12 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_albums">Albums</string>
     <string name="search">Buscar</string>
+    <string name="nombre">Nombre</string>
+    <string name="descripcion">Descripción</string>
+    <string name="selecciona_el_d_a">Selecciona el día</string>
+    <string name="genero">Genero</string>
+    <string name="disquera">Disquera</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="crear">Crear</string>
+    <string name="select_date">Seleccionar fecha</string>
 </resources>

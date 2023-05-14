@@ -4,8 +4,10 @@ import CacheManager
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.android.volley.VolleyError
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.network.NetworkServiceAdapter
+import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -59,6 +61,26 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         }
     }
 
+    fun createAlbum(album: Album, onSuccess: () -> Unit, onError: (error: VolleyError) -> Unit) {
+
+        val albumJson = JSONObject()
+        albumJson.put("name", album.name)
+        albumJson.put("cover", album.cover)
+        albumJson.put("releaseDate", album.releaseDate)
+        albumJson.put("description", album.description)
+        albumJson.put("genre", album.genre)
+        albumJson.put("recordLabel", album.recordLabel)
+
+        NetworkServiceAdapter.getInstance(getApplication()).postAlbum(albumJson, { resp ->
+            refreshDataFromNetwork()
+            onSuccess()
+
+        }, { error ->
+            onError(error)
+        })
+    }
+
+
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
@@ -74,4 +96,5 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         }
 
     }
+
 }
