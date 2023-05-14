@@ -47,6 +47,7 @@ class AlbumCreateFragment:  Fragment() {
                 btnImage.setImageURI(uri)
             }else{
                 //No image
+                uri = Uri.parse("")
             }
         }
     }
@@ -124,10 +125,16 @@ class AlbumCreateFragment:  Fragment() {
             val discTxt : AutoCompleteTextView? = _binding?.txtAlbumDisc
             val genreTxt : AutoCompleteTextView? = _binding?.txtAlbumGenre
 
+            // Comprobar si myString está inicializado
+            var cover :String = ""
+            if(::uri.isInitialized) {
+                cover = uri.toString()
+            }
+
             val album = Album(
                 albumId =  null,
                 name = nameTxt?.text.toString(),
-                cover = uri.toString(),
+                cover = cover,
                 releaseDate = date,
                 description = descTxt?.text.toString(),
                 genre = genreTxt?.text.toString(),
