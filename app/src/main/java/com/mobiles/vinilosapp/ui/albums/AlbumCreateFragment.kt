@@ -4,6 +4,7 @@ import android.R
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,12 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.mobiles.vinilosapp.databinding.AlbumCreateFragmentBinding
 import com.mobiles.vinilosapp.models.Album
+import com.mobiles.vinilosapp.viewmodels.AlbumCreateViewModel
 import com.mobiles.vinilosapp.viewmodels.AlbumViewModel
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -33,7 +36,7 @@ class AlbumCreateFragment:  Fragment() {
 
     private var _binding: AlbumCreateFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: AlbumViewModel
+    private lateinit var viewModel: AlbumCreateViewModel
     private lateinit var btnImage: ImageView
     private lateinit var pickMediaLauncher: ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var uri : Uri
@@ -72,12 +75,22 @@ class AlbumCreateFragment:  Fragment() {
 
         val activity = requireNotNull(this.activity) {
         }
-        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))
-            .get(AlbumViewModel::class.java)
+        viewModel = ViewModelProvider(this, AlbumCreateViewModel.Factory(activity.application))
+            .get(AlbumCreateViewModel::class.java)
 
         _binding?.albumCreateButton?.setOnClickListener(createAlbumListener())
 
         _binding?.etDate?.setOnClickListener { showDatePickerDialog(activity) }
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        viewModel = ViewModelProvider(this, AlbumCreateViewModel.Factory(activity.application))
+            .get(AlbumCreateViewModel::class.java)
 
     }
 
@@ -141,16 +154,12 @@ class AlbumCreateFragment:  Fragment() {
                 recordLabel = discTxt?.text.toString(),
             )
 
-            viewModel.createAlbum(album,
-                onSuccess = {
+            viewModel.createAlbum(album)
+            val action = AlbumCreateFragmentDirections.actionNavigationAlbumCreateFragmentToNavigationAlbums()
+            if (action != null) {
 
-                    NavHostFragment.findNavController(this@AlbumCreateFragment).navigateUp()
-
-                }, onError = { error ->
-
-                    NavHostFragment.findNavController(this@AlbumCreateFragment).navigateUp()
-                }
-            )
+                _binding?.root!!.findNavController().navigate(action)
+            }
 
         }
     }

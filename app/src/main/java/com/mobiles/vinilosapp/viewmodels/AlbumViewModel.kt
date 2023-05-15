@@ -61,25 +61,6 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         }
     }
 
-    fun createAlbum(album: Album, onSuccess: () -> Unit, onError: (error: VolleyError) -> Unit) {
-
-        val albumJson = JSONObject()
-        albumJson.put("name", album.name)
-        albumJson.put("cover", album.cover)
-        albumJson.put("releaseDate", album.releaseDate)
-        albumJson.put("description", album.description)
-        albumJson.put("genre", album.genre)
-        albumJson.put("recordLabel", album.recordLabel)
-
-        NetworkServiceAdapter.getInstance(getApplication()).postAlbum(albumJson, { resp ->
-            refreshDataFromNetwork()
-            onSuccess()
-
-        }, { error ->
-            onError(error)
-        })
-    }
-
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
