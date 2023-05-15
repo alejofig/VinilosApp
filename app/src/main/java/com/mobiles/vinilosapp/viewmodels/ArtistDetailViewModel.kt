@@ -1,26 +1,21 @@
 package com.mobiles.vinilosapp.viewmodels
 
-import CacheManager
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
-import com.android.volley.VolleyError
-import com.mobiles.vinilosapp.models.Album
+import com.mobiles.vinilosapp.models.Artist
 import com.mobiles.vinilosapp.network.NetworkServiceAdapter
-import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
+class ArtistDetailViewModel(application: Application, artistId: Int) :  AndroidViewModel(application) {
+    var applicationViewModel = application
+    val id:Int = artistId
+    private val _artist = MutableLiveData<Artist>()
 
-
-    val applicationViewModel = application
-
-    private val _albums = MutableLiveData<List<Album>>()
-
-    val albums: LiveData<List<Album>>
-        get() = _albums
+    val artist: LiveData<Artist>
+        get() = _artist
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -35,22 +30,20 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
     init {
         refreshDataFromNetwork()
     }
-
     private fun refreshDataFromNetwork() {
         try {
             viewModelScope.launch(Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var potentialResp = CacheManager.getInstance(applicationViewModel.applicationContext).getListFromCache("Albums")
-                    if (potentialResp.isEmpty()) {
-                        Log.d("Cache decision", "return Albums from NetworkService")
-                        var data = NetworkServiceAdapter.getInstance(getApplication()).getAlbums()
-                        CacheManager.getInstance(applicationViewModel.applicationContext).addListToCache("Albums", data)
-                        _albums.postValue(data)
-                    } else {
-                        Log.d("Cache decision", "return Albums from cache")
-                        _albums.postValue(potentialResp as List<Album>?)
+                    var potentialResp = CacheManager.getInstance(applicationViewModel.applicationContext).getArtistDetail(id)
+                    if (potentialResp.artistId == 0){
+                        var data = NetworkServiceAdapter.getInstance(getApplication()).getArtist(id)
+                        CacheManager.getInstance(applicationViewModel.applicationContext).addArtistDetail(id, data)
+                        _artist.postValue(data)
                     }
-
+                    else{
+                        Log.d("Cache decision", "return Artist Detail from cache")
+                        _artist.postValue(potentialResp)
+                    }
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
@@ -60,22 +53,18 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
             _eventNetworkError.value = true
         }
     }
-
-
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
-
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val artistId: Int) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(ArtistDetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumViewModel(app) as T
+                return ArtistDetailViewModel(app, artistId) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
 
     }
-
 }

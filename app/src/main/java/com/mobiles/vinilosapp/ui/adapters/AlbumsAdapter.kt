@@ -1,5 +1,6 @@
 package com.mobiles.vinilosapp.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -10,6 +11,7 @@ import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumItemBinding
 import com.mobiles.vinilosapp.models.Album
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.mobiles.vinilosapp.ui.albums.AlbumFragmentDirections
 
 
@@ -17,6 +19,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
 
     var albums :List<Album> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -40,11 +43,14 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         }
 
         Glide.with(holder.itemView)
-            .load(album.cover)
+            .load(album.cover).apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image))
             .into(holder.viewDataBinding.albumImage)
 
         holder.viewDataBinding.root.setOnClickListener {
-            val action = AlbumFragmentDirections.actionNavigationAlbumsToNavigationAlbumDetail(idAlbum = album.albumId)
+            val action = AlbumFragmentDirections.actionNavigationAlbumsToNavigationAlbumDetail(idAlbum = album.albumId!!)
              // Navigate using that action
              holder.viewDataBinding.root.findNavController().navigate(action)
         }
@@ -54,6 +60,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         return albums.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateAlbumList(albumList: List<Album>){
         this.albums = albumList
         notifyDataSetChanged()

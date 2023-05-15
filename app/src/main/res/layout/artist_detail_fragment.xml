@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.albums.AlbumFragment"
+    tools:context=".ui.artists.ArtistFragment"
     android:layout_marginStart="32dp"
-    android:layout_marginEnd="32dp">
+    android:layout_marginEnd="32dp"
+    >
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -14,9 +15,8 @@
         android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/albumsDetailRv"
+        android:id="@+id/artistsDetailRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/album_detail_item"/>
-
+        tools:listitem="@layout/artist_detail_item"/>
 </FrameLayout>

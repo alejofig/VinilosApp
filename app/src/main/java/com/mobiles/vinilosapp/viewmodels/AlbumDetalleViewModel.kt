@@ -1,11 +1,16 @@
 package com.mobiles.vinilosapp.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.network.NetworkServiceAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumDetalleViewModel(application: Application, albumId: Int) :  AndroidViewModel(application) {
+    var applicationViewModel = application
     val id:Int = albumId
     private val _album = MutableLiveData<Album>()
 
@@ -27,15 +32,28 @@ class AlbumDetalleViewModel(application: Application, albumId: Int) :  AndroidVi
     }
 
     private fun refreshDataFromNetwork() {
-        NetworkServiceAdapter.getInstance(getApplication()).getAlbum(id, {
-            _album.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var potentialResp = CacheManager.getInstance(applicationViewModel.applicationContext).getAlbumDetail(id)
+                    if (potentialResp.albumId == 0){
+                        var data = NetworkServiceAdapter.getInstance(getApplication()).getAlbum(id)
+                        CacheManager.getInstance(applicationViewModel.applicationContext).addAlbumDetail(id, data)
+                        _album.postValue(data)
+                    }
+                    else{
+                        Log.d("Cache decision", "return Album Detail from cache")
+                        _album.postValue(potentialResp)
+                    }
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
             _eventNetworkError.value = true
-        })
+        }
     }
-
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }

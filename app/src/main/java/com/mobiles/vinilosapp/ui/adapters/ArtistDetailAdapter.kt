@@ -8,37 +8,38 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mobiles.vinilosapp.R
-import com.mobiles.vinilosapp.databinding.AlbumDetailItemBinding
-import com.mobiles.vinilosapp.models.Album
+import com.mobiles.vinilosapp.databinding.ArtistDetailItemBinding
+import com.mobiles.vinilosapp.models.Artist
 
-class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
-
-    var album :Album = Album(albumId = 0, name = "", cover = "", releaseDate = "", description = "", genre = "", recordLabel = "")
+class ArtistDetailAdapter: RecyclerView.Adapter<ArtistDetailAdapter.ArtistDetailViewHolder>() {
+    var artist : Artist = Artist(artistId = 0,
+                                name = "",
+                                image = "",
+                                description = "",
+                                birthDate = "",
+                                albums =  emptyList())
         set(value) {
             field = value
             notifyItemChanged(0)
         }
-
-    class AlbumDetailViewHolder(val viewDataBinding: AlbumDetailItemBinding) :
+    class ArtistDetailViewHolder(val viewDataBinding: ArtistDetailItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
-            val LAYOUT = R.layout.album_detail_item
+            val LAYOUT = R.layout.artist_detail_item
         }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumDetailViewHolder {
-        val withDataBinding: AlbumDetailItemBinding = DataBindingUtil.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistDetailAdapter.ArtistDetailViewHolder {
+        val withDataBinding: ArtistDetailItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            AlbumDetailViewHolder.LAYOUT,
+            ArtistDetailAdapter.ArtistDetailViewHolder.LAYOUT,
             parent,
             false)
-        return AlbumDetailViewHolder(withDataBinding)
+        return ArtistDetailAdapter.ArtistDetailViewHolder(withDataBinding)
     }
-
-    override fun onBindViewHolder(holder: AlbumDetailViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArtistDetailAdapter.ArtistDetailViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            it.album = album
+            it.artist = artist
         }
         holder.viewDataBinding.root.setOnClickListener {
             //val action = CollectorFragmentDirections.actionCollectorFragmentToAlbumFragment()
@@ -46,15 +47,13 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
             //holder.viewDataBinding.root.findNavController().navigate(action)
         }
         Glide.with(holder.itemView)
-            .load(album.cover).apply(
+            .load(artist.image).apply(
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image))
-            .into(holder.viewDataBinding.albumImage)
+            .into(holder.viewDataBinding.artistImage)
     }
-
     override fun getItemCount(): Int {
         return 1
     }
-
-}
+    }
