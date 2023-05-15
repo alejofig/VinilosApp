@@ -148,15 +148,25 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
-    fun postAlbum(body: JSONObject,  onComplete:(resp:JSONObject)->Unit , onError: (error:VolleyError)->Unit){
+    suspend fun postAlbum(body: JSONObject) = suspendCoroutine<Album>{ cont ->
         requestQueue.add(postRequest("albums", body,
-            { resp ->
-                onComplete(resp)
+            { albumJson ->
+                val album = Album(
+                    albumId = albumJson.getInt("id"),
+                    name = albumJson.getString("name"),
+                    cover = albumJson.getString("cover"),
+                    releaseDate = albumJson.getString("releaseDate"),
+                    description = albumJson.getString("description"),
+                    genre = albumJson.getString("genre"),
+                    recordLabel = albumJson.getString("recordLabel")
+                )
+                cont.resume(album)
             },
             {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
+
 
     private fun postRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
         return  JsonObjectRequest(Request.Method.POST, BASE_URL+path, body, responseListener, errorListener)
