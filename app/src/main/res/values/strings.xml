@@ -12,4 +12,6 @@
     <string name="cancelar">Cancelar</string>
     <string name="crear">Crear</string>
     <string name="select_date">Seleccionar fecha</string>
+    <string name="comentario">Comentario</string>
+    <string name="comentar">Comentar</string>
 </resources>
