@@ -76,8 +76,16 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="1" />
+
                 <Button
-                    android:id="@+id/album_create_button"
+                    android:id="@+id/album_comment_button"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

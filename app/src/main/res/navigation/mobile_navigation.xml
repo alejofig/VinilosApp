@@ -91,6 +91,9 @@
             android:name="genre_album"
             app:argType="string"
             android:defaultValue=""/>
+        <action
+            android:id="@+id/action_albumCommentFragment_to_navigation_album_detail"
+            app:destination="@id/navigation_album_detail" />
 
     </fragment>
 </navigation>

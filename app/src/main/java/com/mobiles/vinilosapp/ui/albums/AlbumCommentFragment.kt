@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.mobiles.vinilosapp.databinding.AlbumCommentFragmentBinding
-import com.mobiles.vinilosapp.models.Album
-import com.mobiles.vinilosapp.viewmodels.AlbumCommentViewModel
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.textfield.TextInputEditText
 import com.mobiles.vinilosapp.R
+import com.mobiles.vinilosapp.databinding.AlbumCommentFragmentBinding
+import com.mobiles.vinilosapp.models.CollectorComment
+import com.mobiles.vinilosapp.models.Comment
+import com.mobiles.vinilosapp.viewmodels.AlbumCommentViewModel
+
 
 class AlbumCommentFragment:  Fragment() {
 
@@ -71,6 +75,27 @@ class AlbumCommentFragment:  Fragment() {
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image))
             .into(_binding!!.albumImage)
+
+        val ratingBar: RatingBar? = _binding?.ratingBar
+
+        _binding?.albumCommentButton?.setOnClickListener {
+
+            val commentTxt : TextInputEditText? = _binding?.txtAlbumComment
+            val rating = ratingBar!!.rating
+
+            val comment = Comment(
+                id =  null,
+                description = commentTxt?.text.toString(),
+                rating = rating.toInt(),
+                collector = CollectorComment(id = 100)
+            )
+
+            viewModel.createComment(comment, albumId)
+            val action = AlbumCommentFragmentDirections.actionAlbumCommentFragmentToNavigationAlbumDetail()
+            if (action != null) {
+                _binding?.root!!.findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onDestroyView() {
