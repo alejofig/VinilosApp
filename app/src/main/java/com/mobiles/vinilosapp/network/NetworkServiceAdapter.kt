@@ -11,6 +11,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.models.Artist
+import com.mobiles.vinilosapp.models.Collector
+import com.mobiles.vinilosapp.models.Comment
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -86,6 +88,29 @@ class NetworkServiceAdapter constructor(context: Context) {
                     list.add(i, Album(albumId = item.getInt("id"),
                         name = item.getString("name"), cover = item.getString("cover"),
                         recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")
+                    ))
+                }
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
+    }
+
+    suspend fun getCollectors() = suspendCoroutine<List<Collector>>{ cont ->
+        requestQueue.add(getRequest("collectors",
+            { response ->
+                val resp = JSONArray(response)
+                var item:JSONObject? = null
+                val list = mutableListOf<Collector>()
+                for (i in 0 until resp.length()) {
+                    item = resp.getJSONObject(i)
+                    val comments = item.getJSONArray("comments")
+                    list.add(i, Collector(id = item.getInt("id"),
+                                          name = item.getString("name"),
+                                          telephone = item.getString("telephone"),
+                                          email = item.getString("email"),
+                                          comments = mutableListOf<Comment>()
                     ))
                 }
                 cont.resume(list)

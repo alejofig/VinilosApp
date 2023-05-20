@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="collector" type="com.mobiles.vinilosapp.models.Collector"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/colorPrimaryVariant"
+        tools:ignore="MissingConstraints">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/collector_name"
+                android:layout_width="451dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:text="@{collector.name}" />
+
+            <TextView
+                android:id="@+id/collector_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="@{collector.telephone}" />
+
+            <TextView
+                android:id="@+id/collector_email"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="@{collector.email}" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
