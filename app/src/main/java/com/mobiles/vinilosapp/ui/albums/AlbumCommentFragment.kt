@@ -75,6 +75,7 @@ class AlbumCommentFragment:  Fragment() {
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image))
             .into(_binding!!.albumImage)
+        _binding?.albumImage?.setContentDescription("Imagen del album "+albumName )
 
         val ratingBar: RatingBar? = _binding?.ratingBar
 

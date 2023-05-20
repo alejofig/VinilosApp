@@ -6,19 +6,19 @@
     <item
         android:id="@+id/navigation_albums"
         android:icon="@drawable/baseline_folder_24"
-        android:title="Albums"
+        android:title="@string/title_albums"
         android:tint="@android:color/black" />
 
 
     <item
         android:id="@+id/navigation_artists"
         android:icon="@drawable/baseline_queue_music_24"
-        android:title="Artistas"
+        android:title="@string/artistas"
         android:tint="@android:color/black"/>
 
     <item
         android:id="@+id/navigation_collectors"
         android:icon="@drawable/ic_collectors"
-        android:title="Coleccionistas" />
+        android:title="@string/coleccionistas" />
 
 </menu>
