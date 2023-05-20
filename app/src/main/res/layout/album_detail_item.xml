@@ -28,7 +28,6 @@
                 android:orientation="vertical"
                 android:background="?attr/colorPrimaryVariant">
 
-
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
@@ -98,6 +97,18 @@
                     android:text="@{album.description}"
                     android:textColor="@color/white"
                     android:background="@color/transparente"/>
+
+                <Button
+                    android:id="@+id/add_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comentar"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:layout_margin="3dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:backgroundTint="@color/teal_200"
+                    app:shapeAppearanceOverlay="@style/RoundedButton" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

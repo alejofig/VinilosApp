@@ -48,6 +48,9 @@
             android:name="id_album"
             app:argType="integer"
             android:defaultValue="100" />
+        <action
+            android:id="@+id/action_navigation_album_detail_to_albumCommentFragment"
+            app:destination="@id/albumCommentFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_artist_detail"
@@ -66,5 +69,31 @@
         <action
             android:id="@+id/action_navigation_album_create_fragment_to_navigation_albums"
             app:destination="@id/navigation_albums" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumCommentFragment"
+        android:name="com.mobiles.vinilosapp.ui.albums.AlbumCommentFragment"
+        android:label="album_comment_fragment"
+        tools:layout="@layout/album_comment_fragment">
+        <argument
+            android:name="id_album"
+            app:argType="integer"
+            android:defaultValue="100" />
+        <argument
+            android:name="cover_album"
+            app:argType="string"
+            android:defaultValue=""/>
+        <argument
+            android:name="name_album"
+            app:argType="string"
+            android:defaultValue=""/>
+        <argument
+            android:name="genre_album"
+            app:argType="string"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_albumCommentFragment_to_navigation_album_detail"
+            app:destination="@id/navigation_album_detail" />
+
     </fragment>
 </navigation>

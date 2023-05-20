@@ -9,10 +9,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.mobiles.vinilosapp.models.Album
-import com.mobiles.vinilosapp.models.Artist
-import com.mobiles.vinilosapp.models.Collector
-import com.mobiles.vinilosapp.models.Comment
+import com.mobiles.vinilosapp.models.*
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -192,6 +189,16 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
+    suspend fun postComment(body: JSONObject, idAlbum: Int) = suspendCoroutine<JSONObject>{ cont ->
+        requestQueue.add(postRequest("albums/${idAlbum}/comments", body,
+            { commentJson ->
+                cont.resume(commentJson)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
+    }
+
 
     private fun postRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
         return  JsonObjectRequest(Request.Method.POST, BASE_URL+path, body, responseListener, errorListener)
@@ -200,5 +207,6 @@ class NetworkServiceAdapter constructor(context: Context) {
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
     }
+
 
 }

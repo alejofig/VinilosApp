@@ -10,9 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumDetailFragmentBinding
-import com.mobiles.vinilosapp.databinding.AlbumFragmentBinding
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.ui.adapters.AlbumDetailAdapter
 import com.mobiles.vinilosapp.ui.adapters.AlbumsAdapter
