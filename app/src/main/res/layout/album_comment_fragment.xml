@@ -58,7 +58,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="330dp"
                     android:background="@color/transparente"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/Imagen_del_album" />
 
 
                 <com.google.android.material.textfield.TextInputLayout

@@ -59,7 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="330dp"
                     android:background="@color/transparente"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@{@string/album_image(album.name)}"/>
 
                 <TextView
                     android:id="@+id/textView_name_artist"
@@ -102,7 +103,7 @@
                     android:id="@+id/add_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Comentar"
+                    android:text="@string/comentar"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:layout_margin="3dp"

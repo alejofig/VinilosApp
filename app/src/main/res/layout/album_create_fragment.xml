@@ -22,7 +22,7 @@
             android:background="@color/transparente"
             android:scaleType="centerCrop"
             android:src="@drawable/add_img"
-            />
+            android:contentDescription="@string/agregar_imagen_para_crear_el_album" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
