@@ -8,59 +8,70 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mobiles.vinilosapp.databinding.AlbumCommentFragmentBinding
-import com.mobiles.vinilosapp.databinding.AlbumDetailFragmentBinding
 import com.mobiles.vinilosapp.models.Album
-import com.mobiles.vinilosapp.ui.adapters.AlbumDetailAdapter
 import com.mobiles.vinilosapp.viewmodels.AlbumCommentViewModel
-import com.mobiles.vinilosapp.viewmodels.AlbumDetalleViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.mobiles.vinilosapp.R
 
 class AlbumCommentFragment:  Fragment() {
 
     private var _binding: AlbumCommentFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumCommentViewModel
-    //private var viewModelAdapter: AlbumDetailAdapter? = null
     private var albumId: Int = 100
+    private var albumName: String = ""
+    private var albumGenre: String = ""
+    private var albumCover: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = AlbumCommentFragmentBinding.inflate(inflater, container, false)
-
         val view = binding.root
-        //viewModelAdapter = AlbumDetailAdapter()
         return view
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             albumId = it.getInt("id_album")
+            albumName = it.getString("name_album")!!
+            albumCover= it.getString("cover_album")!!
+            albumGenre = it.getString("genre_album")!!
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        viewModel = ViewModelProvider(this, AlbumCommentViewModel.Factory(activity.application, albumId))
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, AlbumCommentViewModel.Factory(requireActivity().application, albumId))
             .get(AlbumCommentViewModel::class.java)
-        viewModel.album.observe(viewLifecycleOwner, Observer<Album> {
-            it.apply {
-               // viewModelAdapter!!.album = this
-            }
-        })
+
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
-    }
 
+        //val album = viewModel.album.value
+
+
+        // Asigna el objeto Album a la variable en el layout
+        //_binding!!.album = album
+
+        _binding?.txtAlbumName?.setText( albumName)
+        _binding?.txtAlbumGenre?.setText(albumGenre)
+
+        Glide.with(view)
+            .load(albumCover).apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image))
+            .into(_binding!!.albumImage)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -6,12 +6,6 @@
     android:orientation="vertical">
 
 
-
-    <data>
-        <variable name="album" type="com.mobiles.vinilosapp.models.Album"/>
-    </data>
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,28 +30,26 @@
 
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/txt_album_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
                     android:paddingTop="36dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="3dp"
-                    android:text="@{album.name}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:background="@color/transparente"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView_name_artist"
+                    android:id="@+id/txt_album_genre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="3dp"
-                    android:text="@{album.genre}"
                     android:textColor="@color/white"
                     android:background="@color/transparente"/>
 
@@ -74,7 +66,7 @@
                     android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txt_album_desc"
+                        android:id="@+id/txt_album_comment"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:hint="@string/comentario"

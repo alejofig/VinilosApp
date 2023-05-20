@@ -81,5 +81,18 @@
             android:name="id_album"
             app:argType="integer"
             android:defaultValue="100" />
+        <argument
+            android:name="cover_album"
+            app:argType="string"
+            android:defaultValue=""/>
+        <argument
+            android:name="name_album"
+            app:argType="string"
+            android:defaultValue=""/>
+        <argument
+            android:name="genre_album"
+            app:argType="string"
+            android:defaultValue=""/>
+
     </fragment>
 </navigation>

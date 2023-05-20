@@ -60,7 +60,12 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
 
 
         holder.btnAddComment.setOnClickListener {
-            val action = AlbumDetailFragmentDirections.actionNavigationAlbumDetailToAlbumCommentFragment(idAlbum = album.albumId!!)
+            val action = AlbumDetailFragmentDirections.actionNavigationAlbumDetailToAlbumCommentFragment(
+                idAlbum = album.albumId!!,
+                nameAlbum = album.name,
+                genreAlbum = album.genre,
+                coverAlbum = album.cover!!
+            )
             holder.viewDataBinding.root.findNavController().navigate(action)
 
         }
