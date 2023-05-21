@@ -86,11 +86,19 @@
                     android:textColor="@color/white"
                     android:background="@color/transparente"/>
 
-
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:scrollbars="vertical"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbarSize="4dp"
+                    android:fadeScrollbars="false"
                     android:paddingStart="8dp"
                     android:paddingTop="3dp"
                     android:paddingEnd="8dp"
@@ -98,6 +106,7 @@
                     android:text="@{album.description}"
                     android:textColor="@color/white"
                     android:background="@color/transparente"/>
+                </ScrollView>
 
                 <Button
                     android:id="@+id/add_comment"
@@ -110,6 +119,11 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:backgroundTint="@color/teal_200"
                     app:shapeAppearanceOverlay="@style/RoundedButton" />
+
+                <ListView
+                    android:id="@+id/listComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

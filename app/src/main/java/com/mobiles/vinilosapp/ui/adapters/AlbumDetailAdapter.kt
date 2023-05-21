@@ -2,7 +2,9 @@ package com.mobiles.vinilosapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -12,11 +14,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumDetailItemBinding
 import com.mobiles.vinilosapp.models.Album
+import com.mobiles.vinilosapp.models.Comment
 import com.mobiles.vinilosapp.ui.albums.AlbumDetailFragmentDirections
 
 class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
 
-    var album :Album = Album(albumId = 0, name = "", cover = "", releaseDate = "", description = "", genre = "", recordLabel = "")
+    var album :Album = Album(albumId = 0, name = "", cover = "", releaseDate = "", description = "", genre = "", recordLabel = "", comments = ArrayList<Comment>())
         set(value) {
             field = value
             notifyItemChanged(0)
@@ -26,6 +29,7 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
         RecyclerView.ViewHolder(viewDataBinding.root) {
 
         val btnAddComment: Button = viewDataBinding.addComment
+        val listComment: ListView = viewDataBinding.listComment
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.album_detail_item
@@ -69,6 +73,15 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
             holder.viewDataBinding.root.findNavController().navigate(action)
 
         }
+        val adapter = ArrayAdapter<Comment>(holder.listComment.context, R.layout.comment_item, album.comments)
+        holder.listComment.adapter = adapter
+
+
+
+
+
+
+
     }
 
     override fun getItemCount(): Int {
