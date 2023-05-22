@@ -20,6 +20,10 @@ class CacheManager(context: Context) {
             detallesAlbum[albumId] = album
         }
     }
+
+    fun updateAlbumDetail(albumId: Int, album: Album){
+        detallesAlbum[albumId] = album
+    }
     fun addArtistDetail(artistId: Int, artist: Artist){
         if (!detalleArtist.containsKey(artistId)){
             detalleArtist[artistId] = artist
@@ -38,6 +42,10 @@ class CacheManager(context: Context) {
         if (!cacheObjects.containsKey(key)){
             cacheObjects[key] = cacheObject
         }
+    }
+
+    fun updateListToCache(key: String, cacheObject: List<Any>){
+        cacheObjects[key] = cacheObject
     }
 
     fun getListFromCache(key: String) : List<Any>{

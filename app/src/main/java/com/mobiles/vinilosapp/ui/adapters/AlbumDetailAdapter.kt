@@ -1,13 +1,14 @@
 package com.mobiles.vinilosapp.ui.adapters
 
+import CommentAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.ListView
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -29,7 +30,8 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
         RecyclerView.ViewHolder(viewDataBinding.root) {
 
         val btnAddComment: Button = viewDataBinding.addComment
-        val listComment: ListView = viewDataBinding.listComment
+        val listView: RecyclerView = viewDataBinding.listComment
+
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.album_detail_item
@@ -49,18 +51,13 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
         holder.viewDataBinding.also {
             it.album = album
         }
-        holder.viewDataBinding.root.setOnClickListener {
-            //val action = CollectorFragmentDirections.actionCollectorFragmentToAlbumFragment()
-            // Navigate using that action
-            //holder.viewDataBinding.root.findNavController().navigate(action)
-        }
+
         Glide.with(holder.itemView)
             .load(album.cover).apply(
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image))
             .into(holder.viewDataBinding.albumImage)
-
 
 
         holder.btnAddComment.setOnClickListener {
@@ -73,14 +70,12 @@ class AlbumDetailAdapter: RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVie
             holder.viewDataBinding.root.findNavController().navigate(action)
 
         }
-        val adapter = ArrayAdapter<Comment>(holder.listComment.context, R.layout.comment_item, album.comments)
-        holder.listComment.adapter = adapter
 
+        val adapter = CommentAdapter(album.comments!!)
+        holder.listView.adapter = adapter
 
-
-
-
-
+        val layoutManager = LinearLayoutManager(holder.listView.context)
+        holder.listView.layoutManager = layoutManager
 
     }
 

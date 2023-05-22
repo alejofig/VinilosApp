@@ -69,7 +69,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                             description = albumItem.getString("description"),
                             genre = albumItem.getString("genre"),
                             recordLabel = albumItem.getString("recordLabel"),
-                            comments= getComments(albumItem.getJSONArray("comments"))
+                            comments= null
                         )
                         albums.add(album)
                     }
@@ -167,7 +167,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                         description = albumJson.getString("description"),
                         genre = albumJson.getString("genre"),
                         recordLabel = albumJson.getString("recordLabel"),
-                        comments = getComments(albumJson.getJSONArray("comments"))
+                        comments = null
                     )
                     albumList.add(album)
                 }
@@ -199,7 +199,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     description = albumJson.getString("description"),
                     genre = albumJson.getString("genre"),
                     recordLabel = albumJson.getString("recordLabel"),
-                    comments = getComments(albumJson.getJSONArray("comments"))
+                    comments = null
                 )
                 cont.resume(album)
             },
