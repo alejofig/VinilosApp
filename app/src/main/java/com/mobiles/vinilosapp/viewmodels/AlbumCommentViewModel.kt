@@ -70,10 +70,16 @@ class AlbumCommentViewModel(application: Application, albumId: Int) :  AndroidVi
         try {
             viewModelScope.launch(Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    val newComment = NetworkServiceAdapter.getInstance(getApplication()).postComment(commnetJson, idAlbum)
-                    //_album.postValue(newAlbum)
+                    NetworkServiceAdapter.getInstance(getApplication()).postComment(commnetJson, idAlbum)
                 }
+                withContext(Dispatchers.IO) {
+                    var data = NetworkServiceAdapter.getInstance(getApplication()).getAlbum(id)
+                    CacheManager.getInstance(applicationViewModel.applicationContext).updateAlbumDetail(id, data)
+                }
+
+                refreshDataFromNetwork()
             }
+
         } catch (e: Exception){
             _eventNetworkError.value = true
         }

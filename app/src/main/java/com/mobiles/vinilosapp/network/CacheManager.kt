@@ -1,6 +1,7 @@
 import android.content.Context
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.models.Artist
+import com.mobiles.vinilosapp.models.Comment
 
 class CacheManager(context: Context) {
     companion object{
@@ -19,6 +20,10 @@ class CacheManager(context: Context) {
             detallesAlbum[albumId] = album
         }
     }
+
+    fun updateAlbumDetail(albumId: Int, album: Album){
+        detallesAlbum[albumId] = album
+    }
     fun addArtistDetail(artistId: Int, artist: Artist){
         if (!detalleArtist.containsKey(artistId)){
             detalleArtist[artistId] = artist
@@ -26,7 +31,7 @@ class CacheManager(context: Context) {
     }
 
     fun getAlbumDetail(albumId: Int) : Album{
-        return if (detallesAlbum.containsKey(albumId)) detallesAlbum[albumId]!! else Album(0, "cache", "cover", "01-01-2023","des", "genre", "record")
+        return if (detallesAlbum.containsKey(albumId)) detallesAlbum[albumId]!! else Album(0, "cache", "cover", "01-01-2023","des", "genre", "record", ArrayList<Comment>() )
     }
 
     fun getArtistDetail(artistId: Int) : Artist{
@@ -37,6 +42,10 @@ class CacheManager(context: Context) {
         if (!cacheObjects.containsKey(key)){
             cacheObjects[key] = cacheObject
         }
+    }
+
+    fun updateListToCache(key: String, cacheObject: List<Any>){
+        cacheObjects[key] = cacheObject
     }
 
     fun getListFromCache(key: String) : List<Any>{

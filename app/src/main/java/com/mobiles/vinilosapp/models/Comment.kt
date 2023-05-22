@@ -4,7 +4,7 @@ data class Comment (
     val id: Int?,
     val description: String,
     val rating: Int,
-    val collector: CollectorComment
+    val collector: CollectorComment?
 )
 
 data class CollectorComment (

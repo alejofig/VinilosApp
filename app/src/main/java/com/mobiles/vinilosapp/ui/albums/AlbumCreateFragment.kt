@@ -152,6 +152,7 @@ class AlbumCreateFragment:  Fragment() {
                 description = descTxt?.text.toString(),
                 genre = genreTxt?.text.toString(),
                 recordLabel = discTxt?.text.toString(),
+                comments = emptyList()
             )
 
             viewModel.createAlbum(album)

@@ -32,6 +32,23 @@ class NetworkServiceAdapter constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
+    private fun getComments(jsonArray: JSONArray): List<Comment> {
+
+        val commentsArray = jsonArray
+        val commentList = mutableListOf<Comment>()
+        for (i in 0 until commentsArray.length()) {
+            val commentObject = commentsArray.getJSONObject(i)
+            val comment = Comment(
+                commentObject.getInt("id"),
+                commentObject.getString("description"),
+                commentObject.getInt("rating"), null
+            )
+            commentList.add(comment)
+        }
+        return commentList
+
+    }
+
     suspend fun getArtists()= suspendCoroutine<List<Artist>>{ cont ->
         requestQueue.add(getRequest("musicians",
             { response ->
@@ -51,7 +68,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                             releaseDate = albumItem.getString("releaseDate"),
                             description = albumItem.getString("description"),
                             genre = albumItem.getString("genre"),
-                            recordLabel = albumItem.getString("recordLabel")
+                            recordLabel = albumItem.getString("recordLabel"),
+                            comments= null
                         )
                         albums.add(album)
                     }
@@ -84,8 +102,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     item = resp.getJSONObject(i)
                     list.add(i, Album(albumId = item.getInt("id"),
                         name = item.getString("name"), cover = item.getString("cover"),
-                        recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")
-                    ))
+                        recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description"), comments = getComments(item.getJSONArray("comments"))                   ))
                 }
                 cont.resume(list)
             },
@@ -125,7 +142,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val resp = JSONObject(response)
                 val album = Album(albumId = resp.getInt("id"),
                     name = resp.getString("name"), cover = resp.getString("cover"),
-                    recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"))
+                    recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"), comments = getComments(resp.getJSONArray("comments")))
                 cont.resume(album)
             },
             {
@@ -149,7 +166,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                         releaseDate = albumJson.getString("releaseDate"),
                         description = albumJson.getString("description"),
                         genre = albumJson.getString("genre"),
-                        recordLabel = albumJson.getString("recordLabel")
+                        recordLabel = albumJson.getString("recordLabel"),
+                        comments = null
                     )
                     albumList.add(album)
                 }
@@ -180,7 +198,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                     releaseDate = albumJson.getString("releaseDate"),
                     description = albumJson.getString("description"),
                     genre = albumJson.getString("genre"),
-                    recordLabel = albumJson.getString("recordLabel")
+                    recordLabel = albumJson.getString("recordLabel"),
+                    comments = null
                 )
                 cont.resume(album)
             },

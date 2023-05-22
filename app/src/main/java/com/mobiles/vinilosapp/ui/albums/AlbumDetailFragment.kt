@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mobiles.vinilosapp.databinding.AlbumDetailFragmentBinding
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.ui.adapters.AlbumDetailAdapter
-import com.mobiles.vinilosapp.ui.adapters.AlbumsAdapter
 import com.mobiles.vinilosapp.viewmodels.AlbumDetalleViewModel
-import com.mobiles.vinilosapp.viewmodels.AlbumViewModel
+
 
 class AlbumDetailFragment : Fragment() {
 

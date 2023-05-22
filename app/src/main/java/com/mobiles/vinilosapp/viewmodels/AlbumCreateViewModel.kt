@@ -1,5 +1,6 @@
 package com.mobiles.vinilosapp.viewmodels
 
+import CacheManager
 import android.app.Application
 import androidx.lifecycle.*
 import com.mobiles.vinilosapp.models.Album
@@ -10,6 +11,8 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class AlbumCreateViewModel(application: Application) :  AndroidViewModel(application) {
+
+    var applicationViewModel = application
 
     private var _album = MutableLiveData<Album>()
 
@@ -44,6 +47,14 @@ class AlbumCreateViewModel(application: Application) :  AndroidViewModel(applica
                     val newAlbum = NetworkServiceAdapter.getInstance(getApplication()).postAlbum(albumJson)
                     _album.postValue(newAlbum)
                 }
+
+                withContext(Dispatchers.IO){
+                    val listAlbum = NetworkServiceAdapter.getInstance(getApplication()).getAlbums()
+                    CacheManager.getInstance(applicationViewModel.applicationContext).updateListToCache("Albums", listAlbum)
+                }
+
+
+
             }
         } catch (e: Exception){
             _eventNetworkError.value = true
