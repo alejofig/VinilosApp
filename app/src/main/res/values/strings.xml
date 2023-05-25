@@ -19,5 +19,6 @@
     <string name="artistas">Artistas</string>
     <string name="coleccionistas">Coleccionistas</string>
     <string name="formato_fecha">%1$d/%2$d/%3$d</string>
+    <string name="descripción_comentario">Descripción del comentario</string>
 
 </resources>

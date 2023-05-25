@@ -1,10 +1,7 @@
 package com.mobiles.vinilosapp.ui.albums
 
-import android.R
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.textfield.TextInputEditText
+import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumCreateFragmentBinding
 import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.viewmodels.AlbumCreateViewModel
@@ -102,7 +100,8 @@ class AlbumCreateFragment:  Fragment() {
 
 
     fun onDateSelected(day:Int, month:Int, year:Int){
-        _binding?.etDate?.setText("Has seleccionado el dia $day del mes $month de $year")
+        //_binding?.etDate?.setText("Has seleccionado el dia $day del mes $month de $year")
+        _binding?.etDate?.setText(getString(R.string.formato_fecha,day,month,year))
 
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.YEAR, year)
@@ -119,10 +118,10 @@ class AlbumCreateFragment:  Fragment() {
 
     private fun setDropDowns() {
         val adapterGenre = ArrayAdapter(
-            requireContext(), R.layout.simple_spinner_dropdown_item, arrayListOf("Classical", "Salsa", "Rock", "Folk")
+            requireContext(), android.R.layout.simple_spinner_dropdown_item, arrayListOf("Classical", "Salsa", "Rock", "Folk")
         )
         val adapterRecord = ArrayAdapter(
-            requireContext(), R.layout.simple_spinner_dropdown_item, arrayListOf("Sony Music", "EMI", "Discos Fuentes", "Elektra", "Fania Records")
+            requireContext(), android.R.layout.simple_spinner_dropdown_item, arrayListOf("Sony Music", "EMI", "Discos Fuentes", "Elektra", "Fania Records")
         )
 
         _binding?.txtAlbumDisc?.setAdapter(adapterRecord)
