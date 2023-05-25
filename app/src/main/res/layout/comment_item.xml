@@ -9,7 +9,7 @@
             android:id="@+id/descripcionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción del comentario" />
+            android:text="@string/descripción_comentario" />
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
