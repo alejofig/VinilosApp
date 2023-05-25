@@ -1,6 +1,8 @@
 package com.mobiles.vinilosapp.ui.albums
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,11 +67,6 @@ class AlbumCommentFragment:  Fragment() {
             if (isNetworkError) onNetworkError()
         })
 
-        //val album = viewModel.album.value
-
-
-        // Asigna el objeto Album a la variable en el layout
-        //_binding!!.album = album
 
         _binding?.txtAlbumName?.setText( albumName)
         _binding?.txtAlbumGenre?.setText(albumGenre)
@@ -83,6 +80,17 @@ class AlbumCommentFragment:  Fragment() {
         _binding?.albumImage?.setContentDescription("Imagen del album "+albumName )
 
         val ratingBar: RatingBar? = _binding?.ratingBar
+
+        _binding?.txtAlbumComment?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                _binding?.albumCommentButton?.isEnabled = s?.isNotEmpty() == true
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
 
         _binding?.albumCommentButton?.setOnClickListener {
 
