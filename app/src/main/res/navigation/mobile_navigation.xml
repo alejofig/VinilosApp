@@ -15,8 +15,16 @@
     <fragment
         android:id="@+id/navigation_collectors"
         android:name="com.mobiles.vinilosapp.ui.collectors.CollectorFragment"
-        android:label="Listado de Collecionistas"
-        tools:layout="@layout/collector_fragment" />
+        android:label="Collecionistas"
+        tools:layout="@layout/collector_fragment">
+
+        <action
+            android:id="@+id/action_navigation_collectors_to_navigation_collector_detail"
+            app:destination="@id/navigation_collector_detail" />
+
+    </fragment>
+
+
 
     <fragment
         android:id="@+id/navigation_albums"
@@ -51,6 +59,18 @@
         <action
             android:id="@+id/action_navigation_album_detail_to_albumCommentFragment"
             app:destination="@id/albumCommentFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_collector_detail"
+        android:name="com.mobiles.vinilosapp.ui.collectors.CollectorDetailFragment"
+        android:label="Detalle Collecionista"
+        tools:layout="@layout/collector_detail_fragment" >
+        <argument
+            android:name="id_collector"
+            app:argType="integer"
+            android:defaultValue="100" />
     </fragment>
     <fragment
         android:id="@+id/navigation_artist_detail"
