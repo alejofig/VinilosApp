@@ -15,6 +15,7 @@ import com.mobiles.vinilosapp.ui.artists.ArtistFragmentDirections
 import androidx.navigation.findNavController
 import com.mobiles.vinilosapp.databinding.CollectorItemBinding
 import com.mobiles.vinilosapp.models.Collector
+import com.mobiles.vinilosapp.ui.collectors.CollectorFragmentDirections
 
 
 class CollectorAdapter : RecyclerView.Adapter<CollectorAdapter.CollectorViewHolder>() {
@@ -44,9 +45,9 @@ class CollectorAdapter : RecyclerView.Adapter<CollectorAdapter.CollectorViewHold
         }
 
         holder.viewDataBinding.root.setOnClickListener {
-            // val action = ArtistFragmentDirections.actionNavigationArtistsToNavigationArtistDetail(idArtist =artist.artistId)
+            val action = CollectorFragmentDirections.actionNavigationCollectorsToNavigationCollectorDetail(idCollector=collector.id)
             // Navigate using that action
-            // holder.viewDataBinding.root.findNavController().navigate(action)
+            holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 
