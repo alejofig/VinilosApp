@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -20,18 +17,16 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputEditText
 import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumCommentFragmentBinding
-import com.mobiles.vinilosapp.models.Album
 import com.mobiles.vinilosapp.models.CollectorComment
 import com.mobiles.vinilosapp.models.Comment
-import com.mobiles.vinilosapp.ui.adapters.AlbumDetailAdapter
-import com.mobiles.vinilosapp.viewmodels.AlbumCommentViewModel
+import com.mobiles.vinilosapp.viewmodels.AlbumDetalleViewModel
 
 
 class AlbumCommentFragment:  Fragment() {
 
     private var _binding: AlbumCommentFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: AlbumCommentViewModel
+    private lateinit var viewModel: AlbumDetalleViewModel
     private var albumId: Int = 100
     private var albumName: String = ""
     private var albumGenre: String = ""
@@ -60,8 +55,8 @@ class AlbumCommentFragment:  Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, AlbumCommentViewModel.Factory(requireActivity().application, albumId))
-            .get(AlbumCommentViewModel::class.java)
+        viewModel = ViewModelProvider(this, AlbumDetalleViewModel.Factory(requireActivity().application, albumId))
+            .get(AlbumDetalleViewModel::class.java)
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
@@ -105,7 +100,7 @@ class AlbumCommentFragment:  Fragment() {
             )
 
             viewModel.createComment(comment, albumId)
-            val action = AlbumCommentFragmentDirections.actionAlbumCommentFragmentToNavigationAlbumDetail()
+            val action = AlbumCommentFragmentDirections.actionAlbumCommentFragmentToNavigationAlbums()
             if (action != null) {
                 _binding?.root!!.findNavController().navigate(action)
             }
