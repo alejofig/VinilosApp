@@ -5,99 +5,104 @@
     tools:context=".ui.albums.AlbumCommentFragment"
     android:orientation="vertical">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp">
+        android:layout_height="match_parent">
 
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="?attr/colorPrimaryVariant">
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
 
-            <LinearLayout
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:background="?attr/colorPrimaryVariant">
 
-
-                <TextView
-                    android:id="@+id/txt_album_name"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingTop="36dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="3dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/white"
-                    android:background="@color/transparente"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txt_album_genre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="3dp"
-                    android:textColor="@color/white"
-                    android:background="@color/transparente"
-                    />
-
-                <ImageView
-                    android:id="@+id/album_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="330dp"
-                    android:background="@color/transparente"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/Imagen_del_album" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="?attr/colorPrimaryVariant">
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txt_album_comment"
+                    <TextView
+                        android:id="@+id/txt_album_name"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:hint="@string/comentario"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="36dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="3dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        android:background="@color/fdark500"
-                        android:maxLength="280"/>
+                        android:background="@color/transparente"
+                        android:textStyle="bold" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:id="@+id/txt_album_genre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="3dp"
+                        android:textColor="@color/white"
+                        android:background="@color/transparente"
+                        />
 
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:rating="0"
-                    android:stepSize="1" />
+                    <ImageView
+                        android:id="@+id/album_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="330dp"
+                        android:background="@color/transparente"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/Imagen_del_album" />
 
-                <Button
-                    android:id="@+id/album_comment_button"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/comentar"
-                    android:backgroundTint="@color/teal_200"
-                    android:enabled="false"/>
 
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_album_comment"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:hint="@string/comentario"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
+                            android:background="@color/fdark500"
+                            android:maxLength="280"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="0"
+                        android:stepSize="1" />
+
+                    <Button
+                        android:id="@+id/album_comment_button"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/comentar"
+                        android:backgroundTint="@color/teal_200"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
