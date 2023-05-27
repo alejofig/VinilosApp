@@ -4,10 +4,12 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.mobiles.vinilosapp.models.Album
+import com.mobiles.vinilosapp.models.Comment
 import com.mobiles.vinilosapp.network.NetworkServiceAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 class AlbumDetalleViewModel(application: Application, albumId: Int) :  AndroidViewModel(application) {
     var applicationViewModel = application
@@ -51,6 +53,29 @@ class AlbumDetalleViewModel(application: Application, albumId: Int) :  AndroidVi
             }
         }
         catch (e:Exception){
+            _eventNetworkError.value = true
+        }
+    }
+    
+    fun createComment(comment: Comment, idAlbum: Int) {
+        val commnetJson = JSONObject()
+
+        commnetJson.put("description", comment.description)
+        commnetJson.put("rating", comment.rating)
+        commnetJson.put("collector", comment.collector)
+
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.Main){
+                    NetworkServiceAdapter.getInstance(getApplication()).postComment(commnetJson, idAlbum)
+                    var data = NetworkServiceAdapter.getInstance(getApplication()).getAlbum(id)
+                    CacheManager.getInstance(applicationViewModel.applicationContext).updateAlbumDetail(id, data)
+                    _album.setValue(data)
+                }
+
+            }
+
+        } catch (e: Exception){
             _eventNetworkError.value = true
         }
     }

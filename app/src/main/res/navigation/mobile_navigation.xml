@@ -112,8 +112,8 @@
             app:argType="string"
             android:defaultValue=""/>
         <action
-            android:id="@+id/action_albumCommentFragment_to_navigation_album_detail"
-            app:destination="@id/navigation_album_detail" />
+            android:id="@+id/action_albumCommentFragment_to_navigation_albums"
+            app:destination="@id/navigation_albums" />
 
     </fragment>
 </navigation>
