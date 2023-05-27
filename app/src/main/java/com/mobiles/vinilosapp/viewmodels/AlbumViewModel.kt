@@ -61,7 +61,6 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         }
     }
 
-
     fun createAlbum(album: Album) {
 
         val albumJson = JSONObject()
@@ -74,9 +73,11 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
 
         try {
             viewModelScope.launch(Dispatchers.Default){
-                withContext(Dispatchers.IO){
-                    val newAlbum = NetworkServiceAdapter.getInstance(getApplication()).postAlbum(albumJson)
-                    refreshDataFromNetwork()
+                withContext(Dispatchers.Main){
+                    NetworkServiceAdapter.getInstance(getApplication()).postAlbum(albumJson)
+                    val listAlbum = NetworkServiceAdapter.getInstance(getApplication()).getAlbums()
+                    CacheManager.getInstance(applicationViewModel.applicationContext).updateListToCache("Albums", listAlbum)
+                    _albums.setValue(listAlbum)
                 }
             }
         } catch (e: Exception){

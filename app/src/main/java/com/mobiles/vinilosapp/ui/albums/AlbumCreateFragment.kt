@@ -11,22 +11,16 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.mobiles.vinilosapp.R
 import com.mobiles.vinilosapp.databinding.AlbumCreateFragmentBinding
 import com.mobiles.vinilosapp.models.Album
-import com.mobiles.vinilosapp.viewmodels.AlbumCreateViewModel
 import com.mobiles.vinilosapp.viewmodels.AlbumViewModel
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -34,7 +28,7 @@ class AlbumCreateFragment:  Fragment() {
 
     private var _binding: AlbumCreateFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: AlbumCreateViewModel
+    private lateinit var viewModel: AlbumViewModel
     private lateinit var btnImage: ImageView
     private lateinit var pickMediaLauncher: ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var uri : Uri
@@ -73,8 +67,8 @@ class AlbumCreateFragment:  Fragment() {
 
         val activity = requireNotNull(this.activity) {
         }
-        viewModel = ViewModelProvider(this, AlbumCreateViewModel.Factory(activity.application))
-            .get(AlbumCreateViewModel::class.java)
+        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))
+            .get(AlbumViewModel::class.java)
 
         _binding?.albumCreateButton?.setOnClickListener(createAlbumListener())
 
@@ -87,8 +81,8 @@ class AlbumCreateFragment:  Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        viewModel = ViewModelProvider(this, AlbumCreateViewModel.Factory(activity.application))
-            .get(AlbumCreateViewModel::class.java)
+        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))
+            .get(AlbumViewModel::class.java)
 
     }
 
