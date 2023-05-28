@@ -69,15 +69,16 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:textColorHint="@color/hint_color">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_album_comment"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
                             android:hint="@string/comentario"
+                            android:textColorHint="@color/hint_color"
                             android:textColor="@color/white"
-                            android:textColorHint="@color/white"
                             android:background="@color/fdark500"
                             android:maxLength="280"/>
 
@@ -89,7 +90,8 @@
                         android:layout_height="wrap_content"
                         android:numStars="5"
                         android:rating="0"
-                        android:stepSize="1" />
+                        android:stepSize="1"
+                        android:contentDescription="@string/rating_bar_description" />
 
                     <Button
                         android:id="@+id/album_comment_button"

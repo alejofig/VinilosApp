@@ -7,18 +7,23 @@
         android:id="@+id/navigation_albums"
         android:icon="@drawable/baseline_folder_24"
         android:title="@string/title_albums"
-        android:tint="@android:color/black" />
-
+        android:tint="@android:color/black"
+        android:contentDescription="@string/description_albums"
+        android:ellipsize="end" />
 
     <item
         android:id="@+id/navigation_artists"
         android:icon="@drawable/baseline_queue_music_24"
         android:title="@string/artistas"
-        android:tint="@android:color/black"/>
+        android:tint="@android:color/black"
+        android:contentDescription="@string/description_artistas"
+        android:ellipsize="end" />
 
     <item
         android:id="@+id/navigation_collectors"
         android:icon="@drawable/ic_collectors"
-        android:title="@string/coleccionistas" />
+        android:title="@string/coleccionistas"
+        android:contentDescription="@string/description_coleccionistas"
+        android:ellipsize="end" />
 
 </menu>

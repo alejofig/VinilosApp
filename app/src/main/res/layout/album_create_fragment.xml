@@ -27,6 +27,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textColorHint="@color/hint_color"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -35,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/nombre"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
                 android:background="@color/fdark500"
                 />
 
@@ -45,7 +45,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:textColorHint="@color/hint_color">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_album_desc"
@@ -61,7 +62,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:textColorHint="@color/hint_color">
 
             <EditText
                 android:id="@+id/etDate"
@@ -79,7 +81,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:textColorHint="@color/hint_color"
+            android:contentDescription="@string/genero">
+
 
             <AutoCompleteTextView
                 android:id="@+id/txt_album_genre"
@@ -93,14 +98,18 @@
                 android:paddingBottom="10dp"
                 android:singleLine="true"
                 android:text="@string/genero"
+                android:textColor="@color/hint_color"
                 android:textAlignment="center"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:contentDescription="@string/disquera"
+            android:textColorHint="@color/hint_color">
 
             <AutoCompleteTextView
                 android:id="@+id/txt_album_disc"
@@ -114,6 +123,7 @@
                 android:paddingBottom="10dp"
                 android:singleLine="true"
                 android:text="@string/disquera"
+                android:textColor="@color/hint_color"
                 android:textAlignment="center"
                 tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
