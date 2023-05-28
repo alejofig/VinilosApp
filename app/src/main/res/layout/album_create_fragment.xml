@@ -27,7 +27,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColorHint="@color/hint_color"
+            android:textColorHint="@color/white"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/nombre"
-                android:textColor="@color/white"
+                android:textColor="@color/white" 
                 android:background="@color/fdark500"
                 />
 
@@ -46,7 +46,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColorHint="@color/hint_color">
+            android:textColorHint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_album_desc"
@@ -63,7 +63,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColorHint="@color/hint_color">
+            android:textColorHint="@color/white">
 
             <EditText
                 android:id="@+id/etDate"
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            android:textColorHint="@color/hint_color"
+            android:textColorHint="@color/white"
             android:contentDescription="@string/genero">
 
 
@@ -109,7 +109,7 @@
             android:layout_height="match_parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:contentDescription="@string/disquera"
-            android:textColorHint="@color/hint_color">
+            android:textColorHint="@color/white">
 
             <AutoCompleteTextView
                 android:id="@+id/txt_album_disc"
