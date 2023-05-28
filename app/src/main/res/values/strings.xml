@@ -1,15 +1,28 @@
 <resources>
     <string name="app_name">Vinilosapp</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_albums">Albums</string>
+    <string name="title_albums">Albumes</string>
+    <string name="description_albums">Explore sus albumes</string>
     <string name="search">Buscar</string>
     <string name="nombre">Nombre</string>
     <string name="descripcion">Descripción</string>
-    <string name="selecciona_el_d_a">Selecciona el día</string>
     <string name="genero">Genero</string>
     <string name="disquera">Disquera</string>
-    <string name="cancelar">Cancelar</string>
     <string name="crear">Crear</string>
     <string name="select_date">Seleccionar fecha</string>
+    <string name="comentario">Comentario</string>
+    <string name="comentar">Comentar</string>
+    <string name="agregar_imagen_para_crear_el_album">Agregar imagen para crear el album</string>
+    <string name="album_image">Imagen del álbum: %s</string>
+    <string name="artist_image">Imagen del artista: %s</string>
+    <string name="Imagen_del_album">Imagen del album</string>
+    <string name="mas">+</string>
+    <string name="artistas">Artistas</string>
+    <string name="description_artistas">Explore los artistas</string>
+    <string name="coleccionistas">Coleccionistas</string>
+    <string name="description_coleccionistas">Explore los coleccionistas</string>
+    <string name="formato_fecha">%1$d/%2$d/%3$d</string>
+    <string name="descripción_comentario">Descripción del comentario</string>
+    <string name="rating_bar_description">rating del comentario</string>
+
 </resources>

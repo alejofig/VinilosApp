@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".ui.albums.AlbumCommentFragment"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="?attr/colorPrimaryVariant">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="?attr/colorPrimaryVariant">
+
+
+                    <TextView
+                        android:id="@+id/txt_album_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="36dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="3dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="@color/white"
+                        android:background="@color/transparente"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_album_genre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="3dp"
+                        android:textColor="@color/white"
+                        android:background="@color/transparente"
+                        />
+
+                    <ImageView
+                        android:id="@+id/album_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="330dp"
+                        android:background="@color/transparente"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/Imagen_del_album" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColorHint="@color/hint_color">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_album_comment"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:hint="@string/comentario"
+                            android:textColorHint="@color/hint_color"
+                            android:textColor="@color/white"
+                            android:background="@color/fdark500"
+                            android:maxLength="280"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="0"
+                        android:stepSize="1"
+                        android:contentDescription="@string/rating_bar_description" />
+
+                    <Button
+                        android:id="@+id/album_comment_button"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/comentar"
+                        android:backgroundTint="@color/teal_200"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

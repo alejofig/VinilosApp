@@ -4,13 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="artist" type="com.mobiles.vinilosapp.models.Artist"/>
+        <variable name="collector" type="com.mobiles.vinilosapp.models.Collector"/>
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -27,7 +28,6 @@
                 android:orientation="vertical"
                 android:background="?attr/colorPrimaryVariant">
 
-
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
@@ -36,43 +36,35 @@
                     android:paddingTop="36dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="3dp"
-                    android:text="@{artist.name}"
+                    android:text="@{collector.name}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white"
                     android:background="@color/transparente"
                     android:textStyle="bold" />
+
                 <TextView
-                    android:id="@+id/textView_date"
+                    android:id="@+id/textView_date_record"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
                     android:paddingTop="3dp"
                     android:paddingEnd="8dp"
-                    android:paddingBottom="3dp"
-                    android:text='@{"Fecha de nacimiento: " + artist.birthDate.substring(0, Math.min(artist.birthDate.length(), 10))}'
+                    android:paddingBottom="16dp"
+                    android:text="@{collector.telephone}"
                     android:textColor="@color/white"
                     android:background="@color/transparente"/>
-                <ImageView
-                    android:id="@+id/artist_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="330dp"
-                    android:background="@color/transparente"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@{@string/artist_image(artist.name)}" />
 
                 <TextView
-                    android:id="@+id/textView_name_artist"
+                    android:id="@+id/album_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="3dp"
-                    android:text="@{artist.description}"
+                    android:text="@{collector.comments[0].description}"
                     android:textColor="@color/white"
                     android:background="@color/transparente"/>
-
-
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

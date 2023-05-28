@@ -61,6 +61,30 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         }
     }
 
+    fun createAlbum(album: Album) {
+
+        val albumJson = JSONObject()
+        albumJson.put("name", album.name)
+        albumJson.put("cover", album.cover)
+        albumJson.put("releaseDate", album.releaseDate)
+        albumJson.put("description", album.description)
+        albumJson.put("genre", album.genre)
+        albumJson.put("recordLabel", album.recordLabel)
+
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.Main){
+                    NetworkServiceAdapter.getInstance(getApplication()).postAlbum(albumJson)
+                    val listAlbum = NetworkServiceAdapter.getInstance(getApplication()).getAlbums()
+                    CacheManager.getInstance(applicationViewModel.applicationContext).updateListToCache("Albums", listAlbum)
+                    _albums.setValue(listAlbum)
+                }
+            }
+        } catch (e: Exception){
+            _eventNetworkError.value = true
+        }
+
+    }
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true

@@ -28,7 +28,6 @@
                 android:orientation="vertical"
                 android:background="?attr/colorPrimaryVariant">
 
-
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
@@ -60,7 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="330dp"
                     android:background="@color/transparente"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@{@string/album_image(album.name)}"/>
 
                 <TextView
                     android:id="@+id/textView_name_artist"
@@ -86,7 +86,10 @@
                     android:textColor="@color/white"
                     android:background="@color/transparente"/>
 
-
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
@@ -98,6 +101,36 @@
                     android:text="@{album.description}"
                     android:textColor="@color/white"
                     android:background="@color/transparente"/>
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/add_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comentar"
+                    android:textColor="@color/fdark700"
+                    android:textSize="20sp"
+                    android:layout_margin="3dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:backgroundTint="@color/teal_200"
+                    app:shapeAppearanceOverlay="@style/RoundedButton" />
+
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/cardview_dark_background"
+                    android:paddingStart="@dimen/grid_spacing"
+                    android:paddingEnd="@dimen/grid_spacing"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/listComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/comment_item" />
+
+                </androidx.core.widget.NestedScrollView>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

@@ -10,4 +10,5 @@
     <color name="fdark500">#474646</color>
     <color name="fdark900">#131313</color>
     <color name="transparente">#00FFFFFF</color>
+    <color name="hint_color">#9C9C9C</color>
 </resources>
