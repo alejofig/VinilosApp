@@ -71,8 +71,9 @@ class CreateCommentAlbumTest {
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
         // Ingresar Datos
+        val randomString: String = getRandomString(3)
         Espresso.onView(ViewMatchers.withId(R.id.txt_album_comment))
-            .perform(ViewActions.replaceText("comment test 1"))
+            .perform(ViewActions.replaceText(randomString))
 
         Thread.sleep(3000)
         Espresso.onView(ViewMatchers.withId(R.id.ratingBar))
@@ -83,24 +84,39 @@ class CreateCommentAlbumTest {
 
         Thread.sleep(2000)
 
-        //Espresso.onView(ViewMatchers.withId(R.id.navigation_albums)).perform(ViewActions.click())
+        //Desplazarse hasta el primer elemento del RecyclerView y hacer clic en él
+        Espresso.onView(ViewMatchers.withId(R.id.albumsRv))
+            .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
+        Espresso.onView(ViewMatchers.withId(R.id.albumsRv))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
 
-        //Thread.sleep(2000)
-
-        //Espresso.pressBack()
-
-        Thread.sleep(3000)
-        //Espresso.onView(ViewMatchers.withId(R.id.txt_album_name))
-        //    .perform(ViewActions.replaceText("Description"))
-
+        Thread.sleep(2000)
 
         // Verificar que se muestra
-        //Espresso.onView(ViewMatchers.withId(R.id.artistsDetailRv))
-        //    .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        //Thread.sleep(1000)
+        Espresso.onView(ViewMatchers.withId(R.id.albumsDetailRv))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        Espresso.onView(ViewMatchers.withId(R.id.listComment)).perform(ViewActions.scrollTo())
+
+        Thread.sleep(2000)
+        Espresso.onView(ViewMatchers.withId(R.id.listComment))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        Thread.sleep(1000)
         // Verificar la descripción del seleccionado
-        //Espresso.onView(ViewMatchers.withText("Es un cantautor, compositor, actor, escritor, poeta y músico español."))
-        //   .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText(randomString))
+           .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+
+
+
+    }
+
+    fun getRandomString(length: Int) : String {
+        val charset = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz0123456789"
+        return (1..length)
+            .map { charset.random() }
+            .joinToString("")
     }
 
     class RatingBarSetter(private val rating: Int) : ViewAction {
