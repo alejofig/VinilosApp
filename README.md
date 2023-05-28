@@ -19,10 +19,22 @@
 ### Sprint 1
 En el release [v1.0.0](https://github.com/alejofig/VinilosApp/releases/tag/v1.0.0) se encuentra el ```vinilosapp-v1.0.0.apk```, el cual puede ser instalado en cualquier dispositivo con versión Android  Lollipop 5.0 o superior.
 
-### Sprint 1
+### Sprint 2
 En el release [v2.0.0](https://github.com/alejofig/VinilosApp/releases/tag/v2.0.0) se encuentra el ```vinilosapp-v2.0.0.apk```, el cual puede ser instalado en cualquier dispositivo con versión Android  Lollipop 5.0 o superior.
+
+### Sprint 3
+En el releae [v3.0.0](https://github.com/alejofig/VinilosApp/releases/tag/v3.0.0) se encuentra el ```vinilosapp-v3.0.0.apk```, el cual puede ser instalado en cualquier dispositivo con version Android Lollipop 5.0 o superior.
 
 ## Inventario de pruebas
 ### Sprint 1
 Las pruebas realizadas se incluyen en la wiki del proyecto:  [Pruebas manuales](https://github.com/alejofig/VinilosApp/wiki/Inventario-de-Pruebas)
+
+### Sprint 2
+Las pruebas realizadas se incluyen en la wiki del proyecto:  [Invenvario de pruebas](https://github.com/alejofig/VinilosApp/wiki/Inventario-de-PruebasS2)
+
+### Sprint 3
+Las pruebas realizadas se incluyen en la wiki del proyecto: 
+* [Inventario de pruebas](https://github.com/alejofig/VinilosApp/wiki/Inventario-de-PruebasS3)  
+* [Pruebas de reconocimienot](https://github.com/alejofig/VinilosApp/wiki/Pruebas-reconocimiento-firebase)
+* [Pruebas de exploracion](https://github.com/alejofig/VinilosApp/wiki/Pruebas-de-exploraci%C3%B3n-(Monkey))
 
